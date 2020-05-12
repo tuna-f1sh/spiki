@@ -301,7 +301,7 @@ class fh_file():
         self.fout.close()
 
     def run(self):
-        cmd = ['fasthenry', self.fname]
+        cmd = ['./fasthenry', self.fname]
         logfile = 'fasthenry.log'
         with open(logfile, 'w') as flog:
             self.p = subprocess.Popen(
@@ -325,12 +325,12 @@ class fh_file():
                     # take real and imag parts
                     pair = re.compile(r' *(\S+) +(\S+)j')
                     for ridx in range(nrows):
-                        lin = fzc.next()
+                        lin = next(fzc)
                         # parse all complex data pairs
                         celms = pair.findall(lin)
                         matr = []
                         for cidx in range(ncols):
-                            Zij = complex(*map(float, celms[cidx]))
+                            Zij = complex(*list(map(float, celms[cidx])))
                             matr.append(Zij)
                         mat.append(matr)
                     mats.append(mat)
@@ -584,11 +584,11 @@ if __name__ == '__main__':
     din = 2 * r_in - tr_w + pitch / 2.0
     dout = 2 * r_in + (2 * N_turns - 0.5) * pitch + tr_w
     ind = calc_ind(N_turns, dout / 1e3, din / 1e3)
-    print 'din =', din
-    print 'dout =', dout
-    print 'ind =', ind
+    print('din =', din)
+    print('dout =', dout)
+    print('ind =', ind)
     k = calc_mut(N_turns, PCB_h)
-    print 'mutual ind =', k * ind, k
+    print('mutual ind =', k * ind, k)
 
     draw_arcs_spiral(N_turns, r_in, pitch, tr_w, N, -dir)
     sf.add_ports()
@@ -604,5 +604,5 @@ if __name__ == '__main__':
     sf.run()
 
     freqs, mats = sf.readZc()
-    print freqs
-    print mats
+    print(freqs)
+    print(mats)
