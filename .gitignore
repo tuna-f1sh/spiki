@@ -4,3 +4,6 @@
 # emacs
 # dot hash files (write locks)
 .\#*
+fasthenry
+*.mat
+*.inp

@@ -17,6 +17,18 @@ The GUI has just a single window, where all the relevant parameters are entered:
 
 ![spiki GUI](https://raw.github.com/in3otd/spiki/gh-pages/spiki.png)
 
+### External Deps
+
+```
+#fasthenry, used to compute the actual inductance
+curl wrcad.com/ftp/pub/fasthenry-3.0wr-110915.tar.gz
+tar -zxvf fasthenry-3.0wr-110915.tar.gz
+cd fasthenry-3.0wr-110915.tar.gz && make && cp bin/fasthenry ./../../
+#NLopt, to find the inductor dimensions
+curl https://github.com/stevengj/nlopt/archive/v2.6.1.tar.gz
+cmake . && make && make install
+```
+
 ### Inductor parameters
 - number of turns : also partial turns (e.g. 3.5) are accepted and sometimes useful to position the terminals at a convenient angle
 - inner radius : distance of the spiral starting point from the center
